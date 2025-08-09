@@ -45,6 +45,6 @@ public record Export(
     public Export with(Consumer<MutableExport> consumer) {
         var mutable = new MutableExport(this);
         consumer.accept(mutable);
-        return mutable.finish();
+        return mutable.freeze();
     }
 }

@@ -25,7 +25,7 @@ public final class MutableExport {
         this.mandated = export.mandated();
     }
 
-    Export finish() {
+    Export freeze() {
         return new Export(
                 package_, to, synthetic, mandated
         );

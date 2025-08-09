@@ -41,7 +41,7 @@ public final class MutableModuleInfo {
         this.targetPlatform = moduleInfo.targetPlatform();
     }
 
-    ModuleInfo finish() {
+    ModuleInfo freeze() {
         return new ModuleInfo(
                 name, exports, requires, provides, uses, version,
                 open, synthetic, mandated,

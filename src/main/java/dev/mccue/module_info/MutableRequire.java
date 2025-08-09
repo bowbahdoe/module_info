@@ -25,7 +25,7 @@ public final class MutableRequire {
         synthetic = require.synthetic();
     }
 
-    Require finish() {
+    Require freeze() {
         return new Require(
                 module,
                 version,

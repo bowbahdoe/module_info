@@ -1,7 +1,6 @@
 package dev.mccue.module_info;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.IOException;
 import java.lang.classfile.ClassFile;
@@ -111,7 +110,7 @@ public record ModuleInfo(
     public ModuleInfo with(Consumer<MutableModuleInfo> consumer) {
         var mutable = new MutableModuleInfo(this);
         consumer.accept(mutable);
-        return mutable.finish();
+        return mutable.freeze();
     }
 
     public static ModuleInfo fromBytes(byte[] bytes) {
@@ -403,26 +402,6 @@ public record ModuleInfo(
 //                        (:hashes hashes)))))
     }
     public byte[] toBytes() {
-        ModuleInfo mi = name.equals("java.base") ? this : this.with(info -> {
-
-        });
-
-        return toBytesHelper(mi);
-    }
-
-    public static void main(String[] args) {
-        var m = new ModuleInfo("org.clojure").with(module -> {
-            module.requires = List.of(
-                    new Require("a").with(require -> {
-                        require.static_ = true;
-                    })
-            );
-            module.open = true;
-        });
-
-        System.out.println(m);
-        System.out.println(new ModuleInfo("java.base"));
-
-        System.out.println(new ModuleInfo("java.basfe"));
+        return toBytesHelper(this);
     }
 }

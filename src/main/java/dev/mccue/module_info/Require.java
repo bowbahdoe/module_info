@@ -32,8 +32,6 @@ public record Require(
     public Require with(Consumer<MutableRequire> consumer) {
         var mutableRequire = new MutableRequire(this);
         consumer.accept(mutableRequire);
-        return mutableRequire.finish();
+        return mutableRequire.freeze();
     }
-
-
 }
